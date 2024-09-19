@@ -5,12 +5,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import Footer from '../components/Footer';
-import Banner1 from "../assets/banner1.webp";
-import Banner2 from "../assets/banner2.webp";
-import Banner3 from "../assets/banner3.PNG";
-import Banner4 from "../assets/banner4.PNG";
-import Banner5 from "../assets/banner5.PNG";
 
+// Import your images
+import Banner1 from '../assets/banner1.webp';
+import Banner2 from '../assets/banner2.webp';
+import Banner3 from '../assets/banner3.PNG';
+import Banner4 from '../assets/banner4.PNG';
+import Banner5 from '../assets/banner5.PNG';
+import UniworkImage from '../assets/uniworth.jpg'; // Example import
 
 const Home = () => {
   const [brands, setBrands] = useState([]);
@@ -25,13 +27,19 @@ const Home = () => {
         console.error('Error fetching JSON:', error);
       }
     };
-  
+
     fetchBrands();
   }, []);
 
+
+  const imageMap = {
+    'uniworth.jpg': UniworkImage,
+    
+  };
+
   return (
     <div className="bg-white z-0">
-      
+      {/* Swiper and other components */}
       <div className="w-full h-[300px] sm:h-64 md:h-80 lg:h-[700px]">
         <Swiper
           pagination={{ clickable: true }}
@@ -46,56 +54,17 @@ const Home = () => {
           <SwiperSlide>
             <div className="w-full h-full">
               <img
-              src={Banner1}
+                src={Banner1}
                 className="w-full h-full object-cover"
                 alt="Slide 1"
               />
             </div>
           </SwiperSlide>
-
-          <SwiperSlide>
-            <div className="w-full h-full">
-              <img
-                src={Banner2}
-                className="w-full h-full object-cover"
-                alt="Slide 2"
-              />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className="w-full h-full">
-              <img
-                src={Banner3}
-                className="w-full h-full object-cover"
-                alt="Slide 3"
-              />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className="w-full h-full">
-              <img
-                src={Banner4}
-                className="w-full h-full object-cover"
-                alt="Slide 4"
-              />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <div className="w-full h-full">
-              <img
-                src={Banner5}
-                className="w-full h-full object-cover"
-                alt="Slide 5"
-              />
-            </div>
-          </SwiperSlide>
+          {/* Other SwiperSlides */}
         </Swiper>
       </div>
 
-      
+      {/* Other Swipers and Footer */}
       <h1 className="text-4xl font-bold text-center mt-10">
         B<span className="underline underline-offset-8 decoration-red-600">rand</span>s
       </h1>
@@ -113,7 +82,6 @@ const Home = () => {
           className="mySwiper pb-16 pt-12 px-20"
         >
           {brands.reduce((parentSlides, brand, index) => {
-            
             if (index % 3 === 0) {
               parentSlides.push([]);
             }
@@ -123,9 +91,9 @@ const Home = () => {
             currentParentSlide.push(
               <div key={brand.key} className={`relative w-full h-[400px]  bg-gray-200 border-2 border-yellow-600 rounded-3xl transition hover:-translate-y-1 hover:scale-110 duration-150 ${marginTopClass}`}>
                 <img
-                  src={brand.image}
+                  src={imageMap[brand.image] || '/default-image.jpg'} // Use imageMap or fallback
                   className="absolute inset-0 w-full h-full object-cover rounded-3xl"
-                  alt={brand.name}
+                  alt={brand.title}
                 />
                 <a
                   href={brand.website}
@@ -145,7 +113,6 @@ const Home = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-
       </div>
 
       <div className="mySwiperContainer lg:hidden sm:flex w-full pb-8 px-4">
@@ -162,28 +129,25 @@ const Home = () => {
           modules={[Pagination, Navigation]}
           className="mySwiper pb-16 pt-12 sm:px-36 mx-4"
         >
-          {brands.map((brand) => {
-            return (
-              <SwiperSlide key={brand.key}>
-                <div className="relative w-full h-[300px] bg-gray-200 border-2 border-yellow-500 rounded-3xl transition hover:-translate-y-1 hover:scale-110 duration-150">
-                  <img
-                    src={brand.image}
-                    className="absolute inset-0 w-full h-full object-cover rounded-3xl"
-                    alt={brand.name}
-                  />
-                  <a
-                    href={brand.website}
-                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-2 py-2 bg-white text-center text-yello-500 w-48 text-xl text-yellow-600 border-2 border-yellow-500 rounded-lg hover:bg-yellow-700"
-                  >
-                    Click Me
-                  </a>
-                </div>
-              </SwiperSlide>
-            );
-          })}
+          {brands.map((brand) => (
+            <SwiperSlide key={brand.key}>
+              <div className="relative w-full h-[300px] bg-gray-200 border-2 border-yellow-500 rounded-3xl transition hover:-translate-y-1 hover:scale-110 duration-150">
+                <img
+                  src={imageMap[brand.image] || '/default-image.jpg'} // Use imageMap or fallback
+                  className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+                  alt={brand.title}
+                />
+                <a
+                  href={brand.website}
+                  className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-2 py-2 bg-white text-center text-yello-500 w-48 text-xl text-yellow-600 border-2 border-yellow-500 rounded-lg hover:bg-yellow-700"
+                >
+                  Click Me
+                </a>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
-
 
       <Footer />
     </div>
