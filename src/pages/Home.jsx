@@ -5,14 +5,21 @@ import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { Pagination, Autoplay, Navigation } from 'swiper/modules';
 import Footer from '../components/Footer';
-
-// Import your images
 import Banner1 from '../assets/banner1.webp';
 import Banner2 from '../assets/banner2.webp';
 import Banner3 from '../assets/banner3.PNG';
 import Banner4 from '../assets/banner4.PNG';
 import Banner5 from '../assets/banner5.PNG';
-import UniworkImage from '../assets/uniworth.jpg'; // Example import
+import UniworkImage from '../assets/uniworth.jpg';
+import Khaadi from "../assets/khaadi.jpg";
+import Bonanza from "../assets/bonanza.jpg";
+import Bata from "../assets/bata.jpg";
+import PeechTree from "../assets/peechTree.jpg";
+import Zara from "../assets/zara.jpg";
+import NishatLinen from "../assets/nishat.jpg";
+import Sapphire from "../assets/sapphire.jpg";
+import Alkaram from "../assets/alkaram.jpg";
+import Cambridge from "../assets/cambridge.jpg";
 
 const Home = () => {
   const [brands, setBrands] = useState([]);
@@ -34,7 +41,15 @@ const Home = () => {
 
   const imageMap = {
     'uniworth.jpg': UniworkImage,
-    
+    'khaadi.jpg': Khaadi,
+    'bonanza.jpg': Bonanza,
+    'bata.jpg': Bata,
+    'peechTree.jpg': PeechTree,
+    'zara.jpg': Zara,
+    'nishat.jpg': NishatLinen,
+    'sapphire.jpg': Sapphire,
+    'alkaram.jpg': Alkaram,
+    'cambridge.jpg': Cambridge,
   };
 
   return (
@@ -60,11 +75,51 @@ const Home = () => {
               />
             </div>
           </SwiperSlide>
-          {/* Other SwiperSlides */}
+
+          <SwiperSlide>
+            <div className="w-full h-full">
+              <img
+                src={Banner2}
+                className="w-full h-full object-cover"
+                alt="Slide 1"
+              />
+            </div>
+          </SwiperSlide>
+          
+          <SwiperSlide>
+            <div className="w-full h-full">
+              <img
+                src={Banner3}
+                className="w-full h-full object-cover"
+                alt="Slide 1"
+              />
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className="w-full h-full">
+              <img
+                src={Banner4}
+                className="w-full h-full object-cover"
+                alt="Slide 1"
+              />
+            </div>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <div className="w-full h-full">
+              <img
+                src={Banner5}
+                className="w-full h-full object-cover"
+                alt="Slide 1"
+              />
+            </div>
+          </SwiperSlide>
+          
         </Swiper>
       </div>
 
-      {/* Other Swipers and Footer */}
+      
       <h1 className="text-4xl font-bold text-center mt-10">
         B<span className="underline underline-offset-8 decoration-red-600">rand</span>s
       </h1>
@@ -91,7 +146,7 @@ const Home = () => {
             currentParentSlide.push(
               <div key={brand.key} className={`relative w-full h-[400px]  bg-gray-200 border-2 border-yellow-600 rounded-3xl transition hover:-translate-y-1 hover:scale-110 duration-150 ${marginTopClass}`}>
                 <img
-                  src={imageMap[brand.image] || '/default-image.jpg'} // Use imageMap or fallback
+                  src={imageMap[brand.image]}
                   className="absolute inset-0 w-full h-full object-cover rounded-3xl"
                   alt={brand.title}
                 />
