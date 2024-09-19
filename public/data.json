@@ -2,7 +2,7 @@
     {
         "key": 1,
         "title": "Uniworth",  
-        "image": "https://scontent.fisb17-1.fna.fbcdn.net/v/t39.30808-6/369697625_679096684260871_6096136081575285883_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEg1qk84qP011VTH2PjdGn0hVhQrqNht4mFWFCuo2G3iXgSGDOXjVokV41o_mC5H3pATFedeQ2aZvM-hhTKIkh8&_nc_ohc=JKlwZ-uJYI8Q7kNvgEh5gW6&_nc_ht=scontent.fisb17-1.fna&oh=00_AYB-WSu-u_Sj328Q5aM7ZuogTNw6a2AYNg-SYCbGcZQs6g&oe=66E8BA59",
+        "image": "../src/assets/uniworth.jpg",
         "website": "https://uniworthshop.com/?srsltid=AfmBOoqmNxkOAoClivDDYn9yZRJQBkUuay13LJJY2c6dudtVKe5xqaFu"
     },
 
