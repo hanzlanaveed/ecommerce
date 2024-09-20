@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'; 
-import { useCart } from '../pages/CartContext';
+import { Link } from 'react-router-dom';
+import { useCart } from './CartContext';
 import CartSidebar from '../components/CartSidebar';
 import Filter from './Filter';
 import Logo from "../assets/logo.PNG";
-import Cart from "../assets/cart.PNG"
+import Cart from "../assets/cart.PNG";
 
 const Navbar = ({ category, setSelectedCategory, setPriceRange, setSearchQuery }) => {
   const [searchQuery, setLocalSearchQuery] = useState('');
@@ -18,20 +18,15 @@ const Navbar = ({ category, setSelectedCategory, setPriceRange, setSearchQuery }
 
   return (
     <div className="flex flex-row">
-      <nav className="bg-slate-50 shadow-md w-full ">
+      <nav className="bg-slate-50 shadow-md w-full">
         
-        <div className="flex lg:hidden flex-col">
-        
+        {/* Navbar for Small Screens */}
+        <div className="flex md:hidden flex-col">
           <div className="flex justify-center w-full p-2">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-20 cursor-pointer"
-            />
+            <img src={Logo} alt="Logo" className="h-20 cursor-pointer" />
           </div>
 
           <div className="flex justify-center items-center space-x-6 mb-4">
-            
             <div className="flex items-center">
               <Filter
                 category={category}
@@ -51,15 +46,18 @@ const Navbar = ({ category, setSelectedCategory, setPriceRange, setSearchQuery }
           </div>
         </div>
 
-
-        <div className="sm:hidden lg:flex justify-between items-center px-10 py-2">
+        {/* Navbar for Medium and Large Screens */}
+        <div className="hidden md:flex items-center px-10 py-2 space-x-16">
           
-          <div className="flex items-center space-x-8 w-fit">
+          {/* Left Section with Navigation Links */}
+          <div className="flex justify-start items-center space-x-8">
             <Link to="/" className="text-gray-600 text-xl hover:text-red-500">Home</Link>
             <Link to="/products" className="text-gray-600 text-xl hover:text-red-500">Products</Link>
             <Link to="/about" className="text-gray-600 text-xl hover:text-red-500">About</Link>
             <Link to="/contact" className="text-gray-600 text-xl hover:text-red-500">Contact</Link>
-            <form onSubmit={handleSearch} className="w-64 pb-1">
+
+            {/* Search Form */}
+            <form onSubmit={handleSearch} className="md:w-48 lg:w-48 pb-1">
               <input
                 type="text"
                 className="w-full pl-4 py-2 border border-gray-300 rounded-full focus:outline-red-600"
@@ -70,17 +68,13 @@ const Navbar = ({ category, setSelectedCategory, setPriceRange, setSearchQuery }
             </form>
           </div>
 
-          
-          <div className="flex justify-center w-fit">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-16 cursor-pointer"
-            />
+          {/* Center Section with Logo */}
+          <div className="flex justify-center">
+            <img src={Logo} alt="Logo" className="h-16 cursor-pointer" />
           </div>
 
-      
-          <div className="flex items-center justify-end space-x-10 w-2/5 pb-1">
+          {/* Right Section with Filter and Cart */}
+          <div className="flex justify-end space-x-20">
             <Filter
               category={category}
               setSelectedCategory={setSelectedCategory}
@@ -100,6 +94,7 @@ const Navbar = ({ category, setSelectedCategory, setPriceRange, setSearchQuery }
 
       </nav>
 
+      {/* Cart Sidebar */}
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );

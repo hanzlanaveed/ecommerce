@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCart } from '../pages/CartContext';
+import { useCart } from './CartContext';
 
 const Modal = ({ product, onClose }) => {
   const { addToCart } = useCart(); 

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import { CartProvider } from './pages/CartContext';
+import { CartProvider } from './components/CartContext';
 import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
 
 const App = () => {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,22 +24,20 @@ const App = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-  
-    const filtered = products.filter( product => {
-      const isCategoryMatch = !selectedCategory || product.category == selectedCategory;
-      const isPriceMatch = !priceRange || (  (priceRange == '0-50' && product.price <= 50) || 
-                                              (priceRange == '50-100' && product.price > 50 && product.price <= 100) || 
-                                              (priceRange == '100-500' && product.price > 100 && product.price <= 500) || 
-                                              (priceRange == '500+' && product.price > 500) );
-      const isSearchMatch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
-      return isCategoryMatch && isPriceMatch && isSearchMatch;
-    });
-    setFilteredProducts(filtered);
-  }, [selectedCategory, priceRange, searchQuery, products]);
-  
+  const filteredProducts = products.filter(product => {
+    const isCategoryMatch = !selectedCategory || product.category === selectedCategory;
+    const isPriceMatch = !priceRange || (
+      (priceRange === '0-50' && product.price <= 50) ||
+      (priceRange === '50-100' && product.price > 50 && product.price <= 100) ||
+      (priceRange === '100-500' && product.price > 100 && product.price <= 500) ||
+      (priceRange === '500+' && product.price > 500)
+    );
+    const isSearchMatch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return isCategoryMatch && isPriceMatch && isSearchMatch;
+  });
+
   const uniqueCategories = [...new Set(products.map(product => product.category))];
-  
+
   return (
     <CartProvider>
       <Router>
@@ -53,7 +50,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductPage products={filteredProducts} />} />
-          
         </Routes>
       </Router>
     </CartProvider>
